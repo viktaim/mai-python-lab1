@@ -130,3 +130,13 @@ def evaluate(tokens):
             state = 2
 
     return tokens[0]
+
+
+
+def calculate_expression(expression):
+    tokens = tokenize(expression)
+    validate(tokens)
+    tokens = convert_to_numbers(tokens)
+    result = evaluate(tokens)
+
+    return result
