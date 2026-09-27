@@ -10,3 +10,9 @@ mass_units = {
     "kg": 1000,    #1 кг = 1000 г
 }
 
+def convert_linear(value, fromUnit, toUnit, unitsDict):
+    coefFrom = unitsDict[fromUnit]
+    coefTo = unitsDict[toUnit]
+    value_in_base = value * coefFrom
+    result = value_in_base / coefTo
+    return result
