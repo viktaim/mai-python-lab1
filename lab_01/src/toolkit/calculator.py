@@ -1,3 +1,5 @@
+from .errors import *
+
 def tokenize(lst):
     mainLst = []
     separateElem = ''
@@ -44,3 +46,38 @@ def tokenize(lst):
             mainLst.append(separateElem)
 
     return mainLst
+
+
+def check_token_sequence(tokens):
+    expecting = "number"
+    for token in tokens:
+        if token == 'number':
+            try:
+                float(token)
+            except ValueError:
+                return False
+        else:
+            try:
+                float(token)
+            except ValueError:
+                if len(token) != 1:
+                    return False
+            else:
+                return False
+
+        if expecting == 'number':
+            expecting = 'operator'
+        else:
+            expecting = 'number'
+
+    return True
+
+# def validate(lst):
+#     if len(lst) == 0:
+#         raise VacuousExpression("Выражение пустое")
+
+#     if lst[-1] in ["+", "-", "*", "/"]:
+#         raise MissingOperand("Оператор в конце выражение")
+
+#     try:
+#         float(5)
