@@ -16,3 +16,30 @@ def convert_linear(value, fromUnit, toUnit, unitsDict):
     value_in_base = value * coefFrom
     result = value_in_base / coefTo
     return result
+
+
+def to_celsius(value, unit):
+    if unit == 'f':
+        num = (value - 32) * (5 / 9)
+    if unit == 'k':
+        num = value - 273.15
+    if unit == 'c':
+        num = value
+
+    return num
+
+
+def from_celsius(celsius_value, unit):
+    if unit == 'c':
+        num = celsius_value
+    if unit == 'f':
+        num = celsius_value * (9/5) + 32
+    if unit == 'k':
+        num = celsius_value + 273.15
+
+    return num
+
+
+def convert_temperature(value, from_unit, to_unit):
+    celsius = to_celsius(value, from_unit)
+    return from_celsius(celsius, to_unit)

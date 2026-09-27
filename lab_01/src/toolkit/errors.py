@@ -6,3 +6,12 @@ class MissingOperand(Exception):  # в конце оператор
 
 class TwoOperators(Exception):  # два оператора подряд
     pass
+
+class UnknownUnit(Exception):   #неизвестная еденица
+    pass
+
+class IncompatibleUnits(Exception):   #несовместимые единицы
+    pass
+
+class BelowAbsoluteZero(Exception):  # температура ниже абсолютного нуля
+    pass
