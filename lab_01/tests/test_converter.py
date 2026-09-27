@@ -1,10 +1,8 @@
-import subprocess
-import sys
 
 import pytest
-
 from toolkit.converter import *
 from toolkit.errors import *
+
 
 def test_priority():
     assert convert(1000, "mm", 'm') == 1

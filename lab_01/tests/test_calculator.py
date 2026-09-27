@@ -1,10 +1,8 @@
-import pytest
 
+import pytest
 from toolkit.calculator import calculate_expression
 from toolkit.errors import DivisionByZeroError, InvalidExpression, VacuousExpression
 
-import subprocess
-import sys
 
 @pytest.mark.parametrize("expression, expected", [
     ("2+3*4", 14),

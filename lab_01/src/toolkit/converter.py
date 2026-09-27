@@ -1,4 +1,4 @@
-from .errors import UnknownUnit, BelowAbsoluteZero, IncompatibleUnits
+from .errors import BelowAbsoluteZero, IncompatibleUnits, UnknownUnit
 
 length_units = {
     "m": 1,    # коэффициент 1
@@ -51,12 +51,7 @@ def validate_temperature(value, unit):
     if unit not in ['c', 'f', 'k']:
         raise UnknownUnit("Неизвестная единица")
     
-    if unit == 'c' and value < -273.15:
-        raise BelowAbsoluteZero("Значение ниже абсолютного нуля")
-    elif unit  == 'f' and value < -459.67:
-        raise BelowAbsoluteZero("Значение ниже абсолютного нуля")
-    elif unit  == 'k' and value < 0:
- 
+    if unit == 'c' and value < -273.15 or unit  == 'f' and value < -459.67 or unit  == 'k' and value < 0:
         raise BelowAbsoluteZero("Значение ниже абсолютного нуля")
 
 
