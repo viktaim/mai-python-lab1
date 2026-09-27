@@ -82,3 +82,51 @@ def validate(lst):
 
     if not check_token_sequence(lst):
         raise TwoOperators("Некорректная последовательность токенов")
+
+
+def convert_to_numbers(tokens):
+    result = []
+    for token in tokens:
+        if token in ["+", "-", "*", "/"]:
+            result.append(token)
+        else:
+            result.append(float(token))
+    return result
+
+
+def evaluate(tokens):
+    state = 0
+    elem = 0
+
+    while state == 0:
+        if tokens[elem] == '*' or tokens[elem] == '/':
+            if tokens[elem] == '*':
+                num = tokens[elem-1] * tokens[elem+1]
+                tokens[elem-1:elem+2] = [num]
+                elem -= 2
+            else:
+                num = tokens[elem - 1] / tokens[elem + 1]
+                tokens[elem-1:elem+2] = [num]
+                elem -= 2
+        else: elem += 1
+
+        if '*' not in tokens and '/' not in tokens:
+            state = 1
+    elem = 0
+
+    while state == 1:
+        if tokens[elem] == '+' or tokens[elem] == '-':
+            if tokens[elem] == '+':
+                num = tokens[elem-1] + tokens[elem+1]
+                tokens[elem-1:elem+2] = [num]
+                elem -= 2
+            else:
+                num = tokens[elem - 1] - tokens[elem + 1]
+                tokens[elem-1:elem+2] = [num]
+                elem -= 2
+        else: elem += 1
+
+        if '+' not in tokens and '-' not in tokens:
+            state = 2
+
+    return tokens[0]
