@@ -51,7 +51,7 @@ def tokenize(lst):
 def check_token_sequence(tokens):
     expecting = "number"
     for token in tokens:
-        if token == 'number':
+        if expecting == 'number':
             try:
                 float(token)
             except ValueError:
@@ -60,7 +60,7 @@ def check_token_sequence(tokens):
             try:
                 float(token)
             except ValueError:
-                if len(token) != 1:
+                if token not in ['+', "-", "*", "/"]:
                     return False
             else:
                 return False
@@ -72,12 +72,13 @@ def check_token_sequence(tokens):
 
     return True
 
-# def validate(lst):
-#     if len(lst) == 0:
-#         raise VacuousExpression("Выражение пустое")
 
-#     if lst[-1] in ["+", "-", "*", "/"]:
-#         raise MissingOperand("Оператор в конце выражение")
+def validate(lst):
+    if len(lst) == 0:
+        raise VacuousExpression("Выражение пустое")
 
-#     try:
-#         float(5)
+    if lst[-1] in ["+", "-", "*", "/"]:
+        raise MissingOperand("Оператор в конце выражение")
+
+    if not check_token_sequence(lst):
+        raise TwoOperators("Некорректная последовательность токенов")
