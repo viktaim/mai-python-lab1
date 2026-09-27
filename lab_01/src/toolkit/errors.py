@@ -6,6 +6,3 @@ class MissingOperand(Exception):  # в конце оператор
 
 class TwoOperators(Exception):  # два оператора подряд
     pass
-
-class InvalidNumber(Exception):  # не тот тип числа
-    pass
