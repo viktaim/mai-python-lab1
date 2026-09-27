@@ -1,4 +1,5 @@
 from .errors import *
+from .converter import *
 
 def tokenize(lst):
     mainLst = []
@@ -81,7 +82,7 @@ def validate(lst):
         raise MissingOperand("Оператор в конце выражение")
 
     if not check_token_sequence(lst):
-        raise TwoOperators("Некорректная последовательность токенов")
+        raise InvalidExpression("Недопустимое выражение")
 
 
 def convert_to_numbers(tokens):
@@ -105,9 +106,12 @@ def evaluate(tokens):
                 tokens[elem-1:elem+2] = [num]
                 elem -= 2
             else:
-                num = tokens[elem - 1] / tokens[elem + 1]
-                tokens[elem-1:elem+2] = [num]
-                elem -= 2
+                if tokens[elem + 1] == 0:
+                    raise DivisionByZeroError("Деление на 0")
+                else:
+                    num = tokens[elem - 1] / tokens[elem + 1]
+                    tokens[elem-1:elem+2] = [num]
+                    elem -= 2
         else: elem += 1
 
         if '*' not in tokens and '/' not in tokens:

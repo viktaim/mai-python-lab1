@@ -1,17 +1,23 @@
-class VacuousExpression(Exception):  # пустое выражение
+class ToolkitError(Exception):
     pass
 
-class MissingOperand(Exception):  # в конце оператор
+class VacuousExpression(ToolkitError):  # пустое выражение
     pass
 
-class TwoOperators(Exception):  # два оператора подряд
+class MissingOperand(ToolkitError):  # в конце оператор
     pass
 
-class UnknownUnit(Exception):   #неизвестная еденица
+class InvalidExpression(ToolkitError):  # недопустимое выражение
     pass
 
-class IncompatibleUnits(Exception):   #несовместимые единицы
+class UnknownUnit(ToolkitError):   #неизвестная еденица
     pass
 
-class BelowAbsoluteZero(Exception):  # температура ниже абсолютного нуля
+class IncompatibleUnits(ToolkitError):   #несовместимые единицы
+    pass
+
+class BelowAbsoluteZero(ToolkitError):  # температура ниже абсолютного нуля
+    pass
+
+class DivisionByZeroError(ToolkitError):   #деление на 0
     pass
